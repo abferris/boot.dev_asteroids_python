@@ -2,8 +2,9 @@ from src.abstractions.constants import *
 import pygame
 
 def run_loop(fps,clock):
-    clock.tick(fps)  
+    output = clock.tick(fps)  
     pygame.display.flip()
+    return output
 
 
 
