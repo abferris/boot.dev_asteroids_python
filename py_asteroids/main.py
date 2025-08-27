@@ -18,16 +18,16 @@ def main():
 
 # background with fill function plain black
         black = (0, 0, 0)
-        # screen.fill(black)
         set_solid_background(black, screen)
         
-
-        bg_secondary = (60,0,0)
-        set_shifting_gradient(bg_secondary, screen,dims,bg_offset)
+        # secondary color is a dark blue 
+        bg_secondary = (0,0,82)
+        bg_speed = .8
+        # this sets up the gradient and makes it shift
+        bg_offset = set_shifting_gradient(bg_secondary, screen,dims,bg_offset,bg_speed)
 
 #  refreshes screen 
-        bg_offset += .6  # increase for faster movement
-
+        # 90 fps
         run_loop(90,clock)
         # clock.tick(90)  # limit to 60 FPS
         # pygame.display.flip()

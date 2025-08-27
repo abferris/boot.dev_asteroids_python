@@ -2,7 +2,7 @@ from src.abstractions.constants import *
 import pygame
 
 def run_loop(fps,clock):
-    clock.tick(90)  # limit to 60 FPS
+    clock.tick(fps)  
     pygame.display.flip()
 
 
@@ -11,7 +11,7 @@ def set_solid_background(rgb,screen):
     screen.fill(rgb)
 
 
-def set_shifting_gradient(rgb,screen,dims,bg_offset = 0,speed=.3 ) :
+def set_shifting_gradient(rgb,screen,dims, bg_offset = 0, speed=.3 ) :
     # assumes black background base
     win_width, win_height = dims
     for y in range(win_height):
@@ -31,5 +31,5 @@ def set_shifting_gradient(rgb,screen,dims,bg_offset = 0,speed=.3 ) :
             mod_rgb = tuple(rgb_list)
             pygame.draw.line(screen, mod_rgb, (0, y), (SCREEN_WIDTH, y))
 
-    bg_offset += speed
+    return bg_offset + speed
 
