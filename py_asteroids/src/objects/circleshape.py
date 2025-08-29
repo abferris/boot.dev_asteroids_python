@@ -12,6 +12,10 @@ class CircleShape(pygame.sprite.Sprite):
         self.position = pygame.Vector2(x, y)
         self.velocity = pygame.Vector2(0, 0)
         self.radius = radius
+        self.paused = False
+
+    def toggle_pause(self):
+        self.paused = not self.paused
 
     def draw(self, screen):
         # sub-classes must override

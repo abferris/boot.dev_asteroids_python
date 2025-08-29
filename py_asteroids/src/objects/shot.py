@@ -11,6 +11,8 @@ class Shot(CircleShape):
         pygame.draw.circle(screen,color,self.position,self.radius, width)
 
     def update(self,dt):
+        if self.paused:
+            return
         
         self.position += self.velocity * dt
         if self.edge_hits >= 2:

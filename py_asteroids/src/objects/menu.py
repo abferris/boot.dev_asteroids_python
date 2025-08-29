@@ -34,7 +34,7 @@ class Menu():
             if key_action == "enter":
                 return process_selection(self.selected, self.option_results)
             elif key_action == "quit":
-                return False, Falseg
+                return False, False
 
             draw_menu(screen,self.title,self.sub_title,self.title_color,self.options,self.selected,self.font,self.small_font)
 

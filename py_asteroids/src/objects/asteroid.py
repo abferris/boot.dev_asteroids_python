@@ -4,13 +4,15 @@ from src.objects.circleshape import CircleShape
 from src.objects.player import Player
 
 class Asteroid(CircleShape):
-    def __init__(self,x,y,radius):
+    def __init__(self,x,y,radius,):
         super().__init__(x,y,radius)
 
     def draw(self,screen,color=ASTEROID_COLOR,width=0):
         pygame.draw.circle(screen,color,(self.position.x, self.position.y),self.radius, width)
 
     def update(self, dt):
+        if self.paused:
+            return
         self.position += self.velocity * dt
 
         # Horizontal wrapping

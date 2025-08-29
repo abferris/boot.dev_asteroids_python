@@ -42,6 +42,8 @@ class Player(CircleShape):
 
 
     def update(self, dt):
+        if self.paused:
+            return
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a] or keys[pygame.K_LEFT]:
@@ -55,7 +57,7 @@ class Player(CircleShape):
         if keys[pygame.K_SPACE] and not self.pacifist_mode :
             self.shoot()
 
-        self.velocity *= self.friction
+        self.velocity *= self.friction ** dt
         self.position += self.velocity * dt
 
         if self.position.x < 0:

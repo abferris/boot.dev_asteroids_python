@@ -4,9 +4,6 @@ import pygame
 from src.abstractions.constants import *
 from src.abstractions.background import *
 from src.abstractions.score_hud import *
-from src.abstractions.menu_screen import *
-from src.abstractions.game_over_screen import *
-
 
 from src.objects.player import Player
 from src.objects.asteroid import Asteroid
@@ -21,23 +18,28 @@ main_menu_options, main_menu_options_results = (
 )
 
 
+pause_options,pause_results = ["Resume", "Restart", "Quit to Main Menu"],  ["resume", "restart", "quit"]
+
+g_o_options, g_o_results = ["Restart", "Exit"],  [True, False]
+
 def main():
+    paused = False
+
     pygame.init()
+
     main_menu = Menu("Asteroids",main_menu_options, main_menu_options_results)
 
     dims = SCREEN_WIDTH, SCREEN_HEIGHT
     screen = pygame.display.set_mode(dims)
     clock = pygame.time.Clock()
+
     font = pygame.font.Font(None,36)
     bg_offset = 0
-    dt = 0
-    survival_time = 0
+
     play, pacifist_mode = main_menu.run_menu(screen, clock)
+    
     if not play:
         return  
-
-
-
 
 
     updatable = pygame.sprite.Group()
@@ -55,26 +57,44 @@ def main():
 
     Shot.containers = (shots, updatable, drawable)
 
-
-    
-    box_width, box_height = 200, 60
-    box_x = SCREEN_WIDTH - box_width - 10  # 10 px from right
-    box_y = 10  # 10 px from top
-    box_color = (30, 30, 30)  # dark gray
-
-
-
     running = True
+
+    pause_menu = Menu("Paused", pause_options, pause_results)
+    last_time = pygame.time.get_ticks()
+
     while running:
+        now = pygame.time.get_ticks()
+        if not paused:
+            dt = (now - last_time) / 1000  # seconds since last frame
+            dt = min(dt, 0.05)
+        else:
+            dt = 0  # freeze time while paused
+        last_time = now
+
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE or event.key == pygame.K_p:
+                    print('toggle pause')
+                    paused = not paused
+                        # choice = pause_menu.run_menu(screen, clock)
+                        # if choice == "resume":
+                        #     paused = False
+                        # elif choice == "restart":
+                        #     main()  
+                        #     return
+                        # elif choice == "quit":
+                        #     return 
+                        # continue
 
+                        
         updatable.update(dt)
+
         for asteroid in asteroids:
             if player.collision_check(asteroid):
-                g_o_options = ["Restart", "Exit"]
-                g_o_results = [True, False]
+
                 scoreline = f"Score: {player.score} | Time: {player.survival_time:.2f}s"
                 game_over_menu = Menu("Game Over",g_o_options, g_o_results, scoreline,(255, 0, 0))
                 restart = game_over_menu.run_menu(screen,clock)
@@ -91,29 +111,22 @@ def main():
         black = (0, 0, 0)
         set_solid_background(black, screen)
 
-        # this sets up the gradient and makes it shift
-        if BG_SECONDARY:
-            bg_offset = set_shifting_gradient(BG_SECONDARY, screen,dims,bg_offset, BG_SPEED)
+        # if BG_SECONDARY:
+        #     bg_offset = set_shifting_gradient(BG_SECONDARY, screen,dims,bg_offset, BG_SPEED)
 
 
         # draws objects
         for obj in drawable:
             obj.draw(screen)
 
-        #score hud
         draw_hud(screen,player)
+        pygame.display.flip()
+         
+        #score hud
         
         # run the game loop
-        dt = run_loop(60,clock)/1000
       # limit to 60 FPS
-
-
-
-
-
-def run_loop(fps,clock):
-    output = clock.tick(fps)  
-    pygame.display.flip()
+    
     return output
         
 if __name__ == "__main__":
