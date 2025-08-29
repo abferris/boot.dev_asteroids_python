@@ -4,7 +4,7 @@ from src.objects.circleshape import CircleShape
 from src.objects.shot import Shot
 
 class Player(CircleShape):
-    def __init__(self, x, y ):
+    def __init__(self, x, y, pacifist_mode = False):
         super().__init__(x, y , PLAYER_RADIUS)
         self.rotation = 0
         self.shoot_cooldown = 0
@@ -13,6 +13,9 @@ class Player(CircleShape):
         self.max_speed = PLAYER_MAX_SPEED
         self.friction = PLAYER_DRAG
         self.score = 0
+        self.survival_time = 0
+        self.pacifist_mode = pacifist_mode
+
 
     def add_score(self, num):
         self.score += num
@@ -49,7 +52,7 @@ class Player(CircleShape):
             self.move(dt)
         if keys[pygame.K_s]or keys[pygame.K_DOWN]:
             self.move(dt,-1)
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE] and not self.pacifist_mode :
             self.shoot()
 
         self.velocity *= self.friction
@@ -67,10 +70,13 @@ class Player(CircleShape):
 
         if self.shoot_cooldown > 0:
             self.shoot_cooldown -= dt
+        
+        self.survival_time+= dt
 
     def shoot(self):
+        tip = self.triangle()[0]
         if self.shoot_cooldown <= 0:
-            shot = Shot(self.position.x,self.position.y)
+            shot = Shot(tip.x,tip.y)
             forward = pygame.Vector2(0, 1).rotate(self.rotation) 
             shot.velocity = forward * PLAYER_SHOOT_SPEED
             self.shoot_cooldown = PLAYER_SHOOT_COOLDOWN 

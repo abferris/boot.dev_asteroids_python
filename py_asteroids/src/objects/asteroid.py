@@ -7,11 +7,23 @@ class Asteroid(CircleShape):
     def __init__(self,x,y,radius):
         super().__init__(x,y,radius)
 
-    def draw(self,screen,color="white",width=2):
+    def draw(self,screen,color=ASTEROID_COLOR,width=0):
         pygame.draw.circle(screen,color,(self.position.x, self.position.y),self.radius, width)
 
-    def update(self,dt):
+    def update(self, dt):
         self.position += self.velocity * dt
+
+        # Horizontal wrapping
+        if self.position.x < -self.radius:
+            self.position.x = SCREEN_WIDTH + self.radius
+        elif self.position.x > SCREEN_WIDTH + self.radius:
+            self.position.x = -self.radius
+
+        # Vertical wrapping
+        if self.position.y < -self.radius:
+            self.position.y = SCREEN_HEIGHT + self.radius
+        elif self.position.y > SCREEN_HEIGHT + self.radius:
+            self.position.y = -self.radius
 
     def get_hit(self,dt, player:Player):
         player.add_score(self.radius)
