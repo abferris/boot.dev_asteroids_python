@@ -84,15 +84,15 @@ def main():
 
                     pause_menu = Menu("Paused", pause_options, pause_results,f"Current Score: {player.score}")
                     paused = not paused
-                        # choice = pause_menu.run_menu(screen, clock)
-                        # if choice == "resume":
-                        #     paused = False
-                        # elif choice == "restart":
-                        #     main()  
-                        #     return
-                        # elif choice == "quit":
-                        #     return 
-                        # continue
+                    choice = pause_menu.run_menu(screen, clock)
+                    if choice == "resume":
+                        paused = False
+                    elif choice == "restart":
+                        main()  
+                        return
+                    elif choice == "quit":
+                        return 
+                    continue
 
                         
         updatable.update(dt)
@@ -102,13 +102,12 @@ def main():
                 final_score = player.score
                 scoreline = f"Score: {player.score} | Time: {player.survival_time:.2f}s"
                 if update_highscore(final_score):
-                    scoreline = f'''NEW HIGH SCORE!
-{scoreline}'''
+                    scoreline = f'''NEW HIGH SCORE!\n{scoreline}'''
 
                 game_over_menu = Menu("Game Over",g_o_options, g_o_results, scoreline,(255, 0, 0))
                 restart = game_over_menu.run_menu(screen,clock)
                 if restart:
-                    main()  # restart the game
+                    main()  
                 else:
                     sys.exit()
         for shot in shots:
@@ -120,21 +119,15 @@ def main():
         black = (0, 0, 0)
         set_solid_background(black, screen)
 
-        # if BG_SECONDARY:
-        #     bg_offset = set_shifting_gradient(BG_SECONDARY, screen,dims,bg_offset, BG_SPEED)
+        if BG_SECONDARY:
+            bg_offset = set_shifting_gradient(BG_SECONDARY, screen,dims,bg_offset, BG_SPEED)
 
-
-        # draws objects
         for obj in drawable:
             obj.draw(screen)
 
         draw_hud(screen,player)
         pygame.display.flip()
-         
-        #score hud
-        
-        # run the game loop
-      # limit to 60 FPS
+
     
     return output
         

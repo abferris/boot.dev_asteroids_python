@@ -15,13 +15,10 @@ class Asteroid(CircleShape):
             return
         self.position += self.velocity * dt
 
-        # Horizontal wrapping
         if self.position.x < -self.radius:
             self.position.x = SCREEN_WIDTH + self.radius
         elif self.position.x > SCREEN_WIDTH + self.radius:
             self.position.x = -self.radius
-
-        # Vertical wrapping
         if self.position.y < -self.radius:
             self.position.y = SCREEN_HEIGHT + self.radius
         elif self.position.y > SCREEN_HEIGHT + self.radius:
@@ -38,13 +35,7 @@ class Asteroid(CircleShape):
             velocity2 = direction.rotate(-45) * self.velocity.length() * 2
             pos1 = self.position + velocity1.normalize() * child_radius
             pos2 = self.position + velocity2.normalize() * child_radius
-            #create child 1
-            # new radius is child radius
-            #  child 1 position is 45 degrees from current velocity counter clockwise
-            # set child 1 velocity 45 degrees from current velocity counter clockwise at 2x the speed of the original asteroid
 
-            #  child 2 position is 45 degrees from current velocity clockwise
-            # set child 2 velocity 45 degrees from current velocity clockwise at 2x the speed of the original asteroid
             child1 = Asteroid(pos1.x, pos1.y, child_radius)
             child1.velocity = velocity1
 
