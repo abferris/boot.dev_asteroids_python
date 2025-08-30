@@ -24,17 +24,16 @@ def load_highscore() -> int:
 
 
 def save_highscore(score: int) -> None:
-    """Save a new high score, overwriting the old one."""
+    print('replacing')
     with open(HIGHSCORE_FILE, "w") as f:
         json.dump({"highscore": score}, f)
 
 
 def update_highscore(score: int) -> bool:
-    """
-    Update the high score if the given score is higher.
-    Returns True if a new high score was set, False otherwise.
-    """
     current = load_highscore()
+    print(score,current)
+
     if score > current:
+        print('new high score')
         save_highscore(score)
         return True
