@@ -136,6 +136,8 @@ Most constants are self evident, but this is a list of constants to change
   - potentially gain a life after a certain amount of points]
 - make the singular highscore into a leaderboard
 - allow for initials to be inserted with a high score
+- allow for fullscreen mode/screen size changes
+  - set up minimum screen size
 
 ## Screen Shots
 Fig. 1: Home Screen
