@@ -61,19 +61,16 @@ def run_game(screen, clock, pacifist_mode):
             if player.collision_check(asteroid):
                 return handle_game_over(screen,clock,player)
                 
-
         for shot in shots:
             for asteroid in asteroids:
                 if shot.collision_check(asteroid):
                     asteroid.get_hit(dt, player)
                     shot.kill()
 
-        # Background
         set_solid_background((0, 0, 0), screen)
         if BG_SECONDARY:
             bg_offset = set_shifting_gradient(BG_SECONDARY, screen, dims, bg_offset, BG_SPEED)
 
-        # Draw
         for obj in drawable:
             obj.draw(screen)
         draw_hud(screen, player)
@@ -103,7 +100,6 @@ def handle_game_over(screen,clock,player):
 
     game_over_menu = Menu("Game Over", g_o_options, g_o_results, scoreline, (255, 0, 0))
 
-    
     restart = game_over_menu.run_menu(screen, clock)
     
     if restart:
