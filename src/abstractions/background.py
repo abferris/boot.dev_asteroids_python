@@ -10,7 +10,6 @@ def set_solid_background(rgb,screen):
 
 
 def set_shifting_gradient(rgb,screen,dims, bg_offset = 0, speed=.3 ) :
-    # assumes black background base
     win_width, win_height = dims
     for y in range(win_height):
             grad_height = win_height
