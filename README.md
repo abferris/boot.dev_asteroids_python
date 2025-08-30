@@ -20,6 +20,21 @@ If the asteroid is the smallest size, there will be no children asteroids create
 
 The game goes on until you are destroyed by hitting an asteroid.
 
+##
+
+Controls:
+
+Accelleration (forward): Up Arrow or W
+Decelleration (accellerate backwards): Down Arrow or S
+Rotate Clockwise: Right Arrow or D
+Rotate Counter Clockwise: Left Arrow or A
+Shoot: Space Bar (This can be held down)
+Pause: Escape or P
+
+Menu Navigation:
+Change Selection: Up/Down Arrow or Mouse Movement
+Select Option: Enter or Click
+
 ## Pre-Requirement Installs
 
 - python 
@@ -121,3 +136,20 @@ Most constants are self evident, but this is a list of constants to change
   - potentially gain a life after a certain amount of points]
 - make the singular highscore into a leaderboard
 - allow for initials to be inserted with a high score
+
+## Screen Shots
+Fig. 1: Home Screen
+
+<img width="1286" height="748" alt="Screenshot 2025-08-30 014732" src="https://github.com/user-attachments/assets/9a1435cb-703f-43a8-84ec-3727b0c57326" />
+
+Fig. 2: Gameplay
+
+<img width="1287" height="750" alt="Screenshot 2025-08-30 014656" src="https://github.com/user-attachments/assets/c96220e7-1ecf-4750-95b7-a2a0790befa8" />
+
+Fig. 3: Pause Screen
+
+<img width="1287" height="749" alt="Screenshot 2025-08-30 014748" src="https://github.com/user-attachments/assets/7fc6bbbe-8726-450a-b8ee-861f169f4105" />
+
+Fig. 4: Game Over menu
+
+<img width="1289" height="750" alt="Screenshot 2025-08-30 014708" src="https://github.com/user-attachments/assets/1060a2a0-a4c2-4722-8d43-e551b0608dc0" />
