@@ -9,11 +9,16 @@ The point is to learn how to make a program in python. This will be accomplished
 This is the arcade classic, asteroids. For those of you who know, that's all you need.
 
 For those who don't know this game, you are a ship in space. The map wraps horizontally and vertically. Asteroids spawn at random on the edges of the map and at increasing rates as time goes on. 
+
 If you are hit by an asteroid, you blow up. Your ship moves with accelleration, and has drag, which will eventually slow it down. You can accellerate forward, backwards, or rotate clockwise or counterclockwise.
+
 Your ship (unless you are in pacifist mode) has a weapon. When the weapon shot it will go off the screen twice before disappearing.
+
 If it comes into a contact with an asteroid, the asteroid will be hit. There are multiple sizes of asteroids. If the asteroid is hit, it will become 2 asteroids one size smaller. They fly at 45 degrees from the asteroid's original trajectory in both directions at twice the original speed.
+
 If the asteroid is the smallest size, there will be no children asteroids created.
-The game goes on until you are destroyed by hitting an asteroid
+
+The game goes on until you are destroyed by hitting an asteroid.
 
 ## Pre-Requirement Installs
 
@@ -22,7 +27,7 @@ The game goes on until you are destroyed by hitting an asteroid
 - pip installer
   - https://pip.pypa.io/en/stable/installation/
 - uv
-    - pip install uv
+  - pip install uv
 
 
 ## Running Instructions
@@ -34,10 +39,47 @@ Commands to run to get this to work:
 - pip install uv
 - uv run main
 
+## Customization 
+
+High scores are stored inside of the file highscores.json.
+To reset your highscores, delete the content of data/highscores.json, or the file itself.
+
 If you would like to modify the game, you can change some of the constants in the constants.py file.
 Do not edit the bottom of that file!
 
-To reset your highscores, delete the content of data/highscores.json, or the file itself.
+Most constants are self evident, but this is a list of constants to change
+- Screen Dimension
+  - Width
+  - Height
+- Asteroid
+  - Attributes
+    - Minimum size
+    - Number of different sizes 
+      - larger sizes of asteroids are extra by the min size
+      - example: 20 original size, wtih 4 kinds (20,40,60,80)
+  - Spawn Attributes
+    - base asteroid spawn rate (in seconds)
+    - minimum asteroid spawn rate (in seconds)
+    - time it takes for the spawn rate to get shorter (in seconds)
+    - amount the spawn rate lessens by (in seconds)
+- Player
+  - size
+  - movement
+    - speed
+    - accelleration
+    - max speed
+    - drag/friction
+  - shot
+    - shot cooldown (minimum time between shots)
+    - shot speed (how fast it travels)
+    - shot size
+
+- background
+  - secondary color
+    - if shot secondary color doesn't exist, it will just be black
+    - if the secondary color exists, the backgroudn will be a gradient that moves upwards
+  - rate at which the background moves 
+
 
 
 ## Folder Structure

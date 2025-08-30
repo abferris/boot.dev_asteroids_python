@@ -1,7 +1,7 @@
 [project]
 name = "py-asteroids"
 version = "0.1.0"
-description = "Add your description here"
+description = "A python implementation, based off the boot.dev course, and customized"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
