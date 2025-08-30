@@ -1,5 +1,6 @@
 from src.abstractions.constants import *
 import pygame
+from src.highscore import load_highscore
 
 def draw_menu(screen,title,sub_title,title_color,options,selected,big_font,small_font,):
     #menu title
@@ -9,9 +10,12 @@ def draw_menu(screen,title,sub_title,title_color,options,selected,big_font,small
 
     #menu subtitle
     if sub_title:
-        sub_title_text = small_font.render((sub_title), True, (255, 255, 255))
-        sub_title_rect = sub_title_text.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/3))
-        screen.blit(sub_title_text, sub_title_rect)
+        sub_x,sub_y = SCREEN_WIDTH/2, SCREEN_HEIGHT/3
+        lines = sub_title.split("\n")
+        for i, line in enumerate(lines):
+            line_text = small_font.render(line, True, (255, 255, 255))
+            line_rect = line_text.get_rect(center=(sub_x,sub_y+i*41))
+            screen.blit(line_text, line_rect)
 
 
 
@@ -36,3 +40,8 @@ def process_selection(selected,options_results):
 def run_menu_loop(clock):
     pygame.display.flip()
 
+def draw_highscore(screen,font):
+    highscore = load_highscore()
+    highscore_text = font.render(f"High Score: {highscore}", True, (255, 255, 255))
+    highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 10, 10))
+    screen.blit(highscore_text, highscore_rect)

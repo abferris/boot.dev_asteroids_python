@@ -6,6 +6,8 @@ from src.abstractions.menu_helpers import *
 from src.abstractions.background import *
 
 
+
+
 class Menu():
     def __init__(self,title,  options,option_results, sub_title = None,title_color =(255,255,255) ):
         self.options = options
@@ -23,6 +25,7 @@ class Menu():
             set_solid_background((0,0,0), screen)
 
             option_rects = draw_menu(screen,self.title,self.sub_title,self.title_color,self.options,self.selected,self.font,self.small_font)
+            draw_highscore(screen,self.small_font)
             
             hovered,clicked = calc_mouse_actions(option_rects)   
             if hovered != -1:

@@ -1,3 +1,5 @@
+import os
+
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 
@@ -21,11 +23,17 @@ PLAYER_SHOOT_SPEED = 500
 PLAYER_DRAG = .7
 SHOT_RADIUS = 2
 
+BG_SECONDARY = (0,0,82)
+BG_SPEED = .8
+
+# DO NOT EDIT BELOW THIS LINE!!!
+
 HUD_WIDTH = 200
 HUD_HEIGHT = 60
 HUD_Y = 10
 HUD_COLOR = 30, 30, 30
 HUD_X = SCREEN_WIDTH - HUD_WIDTH - 10  # 10 px from right
 
-BG_SECONDARY = (0,0,82)
-BG_SPEED = .8
+
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+HIGHSCORE_FILE = os.path.join(DATA_DIR, "highscores.json")
