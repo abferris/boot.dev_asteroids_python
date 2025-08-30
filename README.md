@@ -1,5 +1,7 @@
 # boot.dev_asteroids_python
-
+**Author:** Aaron Ferris
+**Github:** [github.com/abferris](https://github.com/abferris)
+**Version:** 1.0
 ## Objective
 
 The point is to learn how to make a program in python. This will be accomplished by following a guide to making a clone of asteroids, using the boot.dev tutorial
@@ -133,9 +135,18 @@ Most constants are self evident, but this is a list of constants to change
     - make the shot color change
     - add a small explosion for shots connecting
 - make an option for playing with lives
-  - potentially gain a life after a certain amount of points]
+  - potentially gain a life after a certain amount of points
 - make the singular highscore into a leaderboard
 - allow for initials to be inserted with a high score
+- powerups/debuffs
+  - shot mods
+    - multiple 
+    - shot speed up
+    - homing
+    - explosive shot
+  - ship mods
+    - shield
+    - accelleration
 - allow for fullscreen mode/screen size changes
   - set up minimum screen size
 
@@ -155,3 +166,4 @@ Fig. 3: Pause Screen
 Fig. 4: Game Over menu
 
 <img width="1289" height="750" alt="Screenshot 2025-08-30 014708" src="https://github.com/user-attachments/assets/1060a2a0-a4c2-4722-8d43-e551b0608dc0" />
+

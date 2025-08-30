@@ -2,13 +2,11 @@ from src.abstractions.constants import *
 import pygame
 from src.highscore import load_highscore
 
-def draw_menu(screen,title,sub_title,title_color,options,selected,big_font,small_font,):
-    #menu title
+def draw_menu(screen,title,sub_title,title_color,options,selected,big_font,small_font):
     title_text = big_font.render(title, True, title_color)    
     title_rect = title_text.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/4))
     screen.blit(title_text, title_rect)
 
-    #menu subtitle
     if sub_title:
         sub_x,sub_y = SCREEN_WIDTH/2, SCREEN_HEIGHT/3
         lines = sub_title.split("\n")
@@ -19,7 +17,6 @@ def draw_menu(screen,title,sub_title,title_color,options,selected,big_font,small
 
 
 
-    # menu items
     output = []
     for i, option in enumerate(options):
         color = (255, 255, 0) if i == selected else (255, 255, 255)
