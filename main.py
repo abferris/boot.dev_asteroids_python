@@ -11,6 +11,9 @@ from src.objects.asteroidfield import *
 from src.objects.menu import Menu
 from src.objects.shot import Shot
 
+from src.highscore import load_highscore, update_highscore
+
+
 
 main_menu_options, main_menu_options_results = (
     ["Play", "Pacifist Mode", "Exit"], 
@@ -35,12 +38,13 @@ def main():
 
     font = pygame.font.Font(None,36)
     bg_offset = 0
+    highscore = load_highscore()
 
     play, pacifist_mode = main_menu.run_menu(screen, clock)
     
     if not play:
         return  
-
+    
 
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -59,7 +63,7 @@ def main():
 
     running = True
 
-    pause_menu = Menu("Paused", pause_options, pause_results)
+    
     last_time = pygame.time.get_ticks()
 
     while running:
@@ -77,7 +81,8 @@ def main():
                 running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE or event.key == pygame.K_p:
-                    print('toggle pause')
+
+                    pause_menu = Menu("Paused", pause_options, pause_results,f"Current Score: {player.score}")
                     paused = not paused
                         # choice = pause_menu.run_menu(screen, clock)
                         # if choice == "resume":
@@ -94,8 +99,12 @@ def main():
 
         for asteroid in asteroids:
             if player.collision_check(asteroid):
-
+                final_score = player.score
                 scoreline = f"Score: {player.score} | Time: {player.survival_time:.2f}s"
+                if update_highscore(final_score):
+                    scoreline = f'''NEW HIGH SCORE!
+{scoreline}'''
+
                 game_over_menu = Menu("Game Over",g_o_options, g_o_results, scoreline,(255, 0, 0))
                 restart = game_over_menu.run_menu(screen,clock)
                 if restart:
