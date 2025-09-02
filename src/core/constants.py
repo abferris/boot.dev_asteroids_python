@@ -1,5 +1,7 @@
 import os
+import pygame
 
+# Dimensions set in pixels
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 
@@ -31,11 +33,15 @@ BG_SPEED = .1
 
 # DO NOT EDIT BELOW THIS LINE!!!
 
+#Dimensions are in pixels
 HUD_WIDTH = 200
 HUD_HEIGHT = 60
 HUD_Y = 10
 HUD_COLOR = 30, 30, 30
 HUD_X = SCREEN_WIDTH - HUD_WIDTH - 10  # 10 px from right
+
+LARGE_FONT_SIZE = 72
+SMALL_FONT_SIZE = 36
 
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")

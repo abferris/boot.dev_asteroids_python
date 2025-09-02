@@ -1,8 +1,9 @@
 import pygame
 
-from src.abstractions.constants import *
-from src.objects.circleshape import CircleShape
-from src.objects.player import Player
+from src.core.constants import *
+
+from src.game.circleshape import CircleShape
+from src.game.player.player import Player
 
 class Asteroid(CircleShape):
     def __init__(self,x,y,radius,):

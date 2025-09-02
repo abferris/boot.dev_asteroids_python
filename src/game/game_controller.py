@@ -1,15 +1,16 @@
 import pygame
-from src.abstractions.constants import *
-from src.abstractions.background import *
-from src.abstractions.score_hud import *
 
-from src.objects.player import Player
-from src.objects.asteroid import Asteroid
-from src.objects.asteroidfield import *
-from src.objects.menu import Menu
-from src.objects.shot import Shot
+from src.core.constants import *
+from src.core.background import set_solid_background, set_shifting_gradient
+from src.core.highscore import update_highscore
 
-from src.highscore import load_highscore, update_highscore
+from src.game.player.player import Player
+from src.game.enemies.asteroid import Asteroid
+from src.game.enemies.asteroidfield import AsteroidField
+from src.game.player.shot import Shot
+
+from src.ui.menu import Menu
+from src.ui.score_hud import draw_hud
 
 
 
@@ -50,7 +51,7 @@ def run_game(screen, clock, pacifist_mode):
                 return "quit"
             if event.type == pygame.KEYDOWN:
                 if event.key in (pygame.K_ESCAPE, pygame.K_p):
-                    pause = handle_pause(screen,clock,player)
+                    pause = handle_pause(screen,clock,player,pacifist_mode)
                     if pause:
                         return pause
      
@@ -77,11 +78,12 @@ def run_game(screen, clock, pacifist_mode):
 
         pygame.display.flip()
 
-def handle_pause(screen,clock,player):
+def handle_pause(screen, clock, player):
     pause_options,pause_results = ["Resume", "Restart", "Quit"],  ["resume", "restart", "quit"]
     pause_menu = Menu("Paused", pause_options, pause_results, f"Current Score: {player.score}")
-
-    choice = pause_menu.run_menu(screen, clock)
+    if player.pacifist_mode:
+        choice = pause_menu.run_menu(screen, clock, 0)
+        choice = pause_menu.run_menu(screen, clock, 1)
 
     if choice == "resume":
        return False
@@ -92,16 +94,24 @@ def handle_pause(screen,clock,player):
 
 def handle_game_over(screen,clock,player):
     final_score = player.score
+    final_time = player.survival_time
+    pacifist_mode = player.pacifist_mode
     game_over_options, game_over_results = ["Restart", "Exit"],  [True, False]
-    scoreline = f"Score: {player.score} | Time: {player.survival_time:.2f}s"
-
-    if update_highscore(final_score):
-        scoreline = f"NEW HIGH SCORE!\n{scoreline}"
+    if not pacifist_mode:
+            scoreline = f"Score: {player.score} | Time: {player.survival_time:.2f}s"
+            pacifist_option = 0
+    else:
+        scoreline = f"Time: {player.survival_time:.2f}s"
+        pacifist_option = 1
+    if update_highscore(final_score,final_time,pacifist_mode):
+            scoreline = f"NEW HIGH SCORE!\n{scoreline}"
 
     game_over_menu = Menu("Game Over", game_over_options, game_over_results, scoreline, (255, 0, 0))
 
-    restart = game_over_menu.run_menu(screen, clock)
     
+    restart = game_over_menu.run_menu(screen, clock, pacifist_option)
+
+
     if restart:
         return "restart"
     else:

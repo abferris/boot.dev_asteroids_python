@@ -1,33 +1,31 @@
 import pygame
 
-from src.abstractions.constants import *
-from src.abstractions.input_helpers import *
-from src.abstractions.menu_helpers import *
-from src.abstractions.background import *
+from src.core.constants import *
+from src.core.background import set_solid_background
 
-from src.objects.player import Player
-
+from src.ui.menu_inputs import handle_keyboard_inputs, calc_mouse_actions
+from src.ui.menu_helpers import draw_menu, process_selection, draw_highscore
 
 
 
 class Menu():
-    def __init__(self,title,  options,option_results, sub_title = None,title_color =(255,255,255) ):
+    def __init__(self, title, options, option_results, sub_title = None,title_color =(255,255,255)):
         self.options = options
         self.option_results = option_results
         self.selected = 0
         self.running = True
         self.title = title
-        self.font = pygame.font.Font(None, 72)
-        self.small_font = pygame.font.Font(None, 36)
         self.title_color = title_color
         self.sub_title = sub_title
 
-    def run_menu(self,screen,clock):
+    def run_menu(self, screen, clock, pacifist_mode):
         while self.running:
             set_solid_background((0,0,0), screen)
 
-            option_rects = draw_menu(screen,self.title,self.sub_title,self.title_color,self.options,self.selected,self.font,self.small_font)
-            draw_highscore(screen,self.small_font)
+            option_rects = draw_menu(screen,self.title,self.sub_title,self.title_color,self.options,self.selected)
+
+            # Highscores are being loaded repeatedly. Refactor to only do this once
+            draw_highscore(screen, pacifist_mode)
             
             hovered,clicked = calc_mouse_actions(option_rects)   
 
@@ -37,13 +35,12 @@ class Menu():
                 return process_selection(self.selected,self.option_results)
 
             self.selected,key_action = handle_keyboard_inputs(self.selected,self.options,self.option_results)     
-            
+
             if key_action == "enter":
                 return process_selection(self.selected, self.option_results)
             elif key_action == "quit":
                 return False, False
 
-            draw_menu(screen,self.title,self.sub_title,self.title_color,self.options,self.selected,self.font,self.small_font)
-
-
-            run_menu_loop(clock)
+            draw_menu(screen,self.title,self.sub_title,self.title_color,self.options,self.selected)
+            
+            pygame.display.flip()

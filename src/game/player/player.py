@@ -1,9 +1,9 @@
 import pygame
 
-from src.abstractions.constants import *
+from src.core.constants import *
 
-from src.objects.circleshape import CircleShape
-from src.objects.shot import Shot
+from src.game.circleshape import CircleShape
+from src.game.player.shot import Shot
 
 class Player(CircleShape):
     def __init__(self, x, y, pacifist_mode = False):

@@ -1,4 +1,4 @@
-from src.abstractions.constants import *
+from src.core.constants import *
 import pygame
 
 
@@ -21,7 +21,7 @@ def set_shifting_gradient(rgb,screen,dimensions, bg_offset = 0, speed=.3 ) :
                 for val in rgb:
                     temp = int(val * (grad_pos / (half_grad_height)))
                     rgb_list.append(temp)
-            else :
+            else:
                 for val in rgb:
                     temp = int(val * (1 - (grad_pos - half_grad_height) / (half_grad_height)))
                     rgb_list.append(temp)

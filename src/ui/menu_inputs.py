@@ -1,5 +1,6 @@
 import pygame
-from src.abstractions.constants import *
+
+from src.core.constants import *
 
 def handle_mouse_click(mouse_pos, mouse_pressed, option_rects):
     selected_index = -1

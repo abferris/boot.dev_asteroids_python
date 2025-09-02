@@ -1,18 +1,13 @@
 import sys
 import pygame
 
-from src.abstractions.constants import *
-from src.abstractions.background import *
-from src.abstractions.score_hud import *
-from src.abstractions.game_helpers import *
+from src.core.constants import *
+from src.core.background import *
 
-from src.objects.player import Player
-from src.objects.asteroid import Asteroid
-from src.objects.asteroidfield import *
-from src.objects.menu import Menu
-from src.objects.shot import Shot
+from src.game.game_controller import run_game, handle_pause
 
-from src.highscore import load_highscore, update_highscore
+from src.ui.menu import Menu
+from src.core.highscore import load_highscore
 
 
 
@@ -33,13 +28,12 @@ def main():
     screen = pygame.display.set_mode(dimensions)
     clock = pygame.time.Clock()
 
-
-    highscore = load_highscore()
+    highscore,pacifist_highscore = load_highscore()
 
     while True:
         main_menu = Menu("Asteroids",main_menu_options, main_menu_options_results)
 
-        play, pacifist_mode = main_menu.run_menu(screen, clock)
+        play, pacifist_mode = main_menu.run_menu(screen, clock,2)
     
         if not play:
             return  
