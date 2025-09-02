@@ -52,4 +52,4 @@ def update_highscore(score: int, time, pacifist_mode=False) -> bool:
     if score > current:
         save_highscore(score,pacifist_mode)
         return True
-    return false
+    return False
