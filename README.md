@@ -22,9 +22,7 @@ If the asteroid is the smallest size, there will be no children asteroids create
 
 The game goes on until you are destroyed by hitting an asteroid.
 
-##
-
-Controls:
+## Controls:
 
 Accelleration (forward): Up Arrow or W
 Decelleration (accellerate backwards): Down Arrow or S
