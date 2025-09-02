@@ -1,10 +1,10 @@
-# boot.dev_asteroids_python
+# Python Asteroids
 **Author:** Aaron Ferris
 **Github:** [github.com/abferris](https://github.com/abferris)
 **Version:** 1.0
 ## Objective
 
-The point is to learn how to make a program in python. This will be accomplished by following a guide to making a clone of asteroids, using the boot.dev tutorial
+The point is to learn how to make a program in python. The base of this implementation of asteroids is using a very basic boot.dev tutorial. Most of the customizations off it are mine personally, modifications to the asteroid spawning array, accelleration logic for movement, background customizations, among many other options.
 
 ## Rules of the game
 
@@ -22,9 +22,7 @@ If the asteroid is the smallest size, there will be no children asteroids create
 
 The game goes on until you are destroyed by hitting an asteroid.
 
-##
-
-Controls:
+##Controls:
 
 Accelleration (forward): Up Arrow or W
 Decelleration (accellerate backwards): Down Arrow or S
