@@ -1,9 +1,11 @@
 import pygame
+
 from src.abstractions.constants import *
-from src.objects.player import Player
 from src.abstractions.input_helpers import *
 from src.abstractions.menu_helpers import *
 from src.abstractions.background import *
+
+from src.objects.player import Player
 
 
 
@@ -28,12 +30,14 @@ class Menu():
             draw_highscore(screen,self.small_font)
             
             hovered,clicked = calc_mouse_actions(option_rects)   
+
             if hovered != -1:
                 self.selected = hovered
             if clicked:
                 return process_selection(self.selected,self.option_results)
 
             self.selected,key_action = handle_keyboard_inputs(self.selected,self.options,self.option_results)     
+            
             if key_action == "enter":
                 return process_selection(self.selected, self.option_results)
             elif key_action == "quit":

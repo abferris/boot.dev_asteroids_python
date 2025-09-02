@@ -27,10 +27,10 @@ main_menu_options, main_menu_options_results = (
 
 
 def main():
-    dims = SCREEN_WIDTH, SCREEN_HEIGHT
+    dimensions = SCREEN_WIDTH, SCREEN_HEIGHT
 
     pygame.init()
-    screen = pygame.display.set_mode(dims)
+    screen = pygame.display.set_mode(dimensions)
     clock = pygame.time.Clock()
 
 

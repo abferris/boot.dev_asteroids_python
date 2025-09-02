@@ -1,5 +1,7 @@
 import pygame
+
 from src.abstractions.constants import *
+
 from src.objects.circleshape import CircleShape
 from src.objects.shot import Shot
 
@@ -77,6 +79,7 @@ class Player(CircleShape):
 
     def shoot(self):
         tip = self.triangle()[0]
+        
         if self.shoot_cooldown <= 0:
             shot = Shot(tip.x,tip.y)
             forward = pygame.Vector2(0, 1).rotate(self.rotation) 

@@ -16,7 +16,7 @@ from src.highscore import load_highscore, update_highscore
 
 def run_game(screen, clock, pacifist_mode):
     paused = False
-    dims = SCREEN_WIDTH, SCREEN_HEIGHT
+    dimensions = SCREEN_WIDTH, SCREEN_HEIGHT
     bg_offset = 0
 
     updatable = pygame.sprite.Group()
@@ -69,7 +69,7 @@ def run_game(screen, clock, pacifist_mode):
 
         set_solid_background((0, 0, 0), screen)
         if BG_SECONDARY:
-            bg_offset = set_shifting_gradient(BG_SECONDARY, screen, dims, bg_offset, BG_SPEED)
+            bg_offset = set_shifting_gradient(BG_SECONDARY, screen, dimensions, bg_offset, BG_SPEED)
 
         for obj in drawable:
             obj.draw(screen)
@@ -92,13 +92,13 @@ def handle_pause(screen,clock,player):
 
 def handle_game_over(screen,clock,player):
     final_score = player.score
-    g_o_options, g_o_results = ["Restart", "Exit"],  [True, False]
+    game_over_options, game_over_results = ["Restart", "Exit"],  [True, False]
     scoreline = f"Score: {player.score} | Time: {player.survival_time:.2f}s"
 
     if update_highscore(final_score):
         scoreline = f"NEW HIGH SCORE!\n{scoreline}"
 
-    game_over_menu = Menu("Game Over", g_o_options, g_o_results, scoreline, (255, 0, 0))
+    game_over_menu = Menu("Game Over", game_over_options, game_over_results, scoreline, (255, 0, 0))
 
     restart = game_over_menu.run_menu(screen, clock)
     
