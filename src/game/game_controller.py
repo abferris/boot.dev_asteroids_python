@@ -51,7 +51,7 @@ def run_game(screen, clock, pacifist_mode):
                 return "quit"
             if event.type == pygame.KEYDOWN:
                 if event.key in (pygame.K_ESCAPE, pygame.K_p):
-                    pause = handle_pause(screen,clock,player,pacifist_mode)
+                    pause = handle_pause(screen,clock,player)
                     if pause:
                         return pause
      
@@ -83,6 +83,7 @@ def handle_pause(screen, clock, player):
     pause_menu = Menu("Paused", pause_options, pause_results, f"Current Score: {player.score}")
     if player.pacifist_mode:
         choice = pause_menu.run_menu(screen, clock, 0)
+    else:
         choice = pause_menu.run_menu(screen, clock, 1)
 
     if choice == "resume":

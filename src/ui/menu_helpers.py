@@ -47,13 +47,13 @@ def draw_highscore(screen, pacifist_mode:bool=False):
         highscore_text = font.render(f"High Score: {highscore}", True, (255, 255, 255))
     elif pacifist_mode == 1:
         highscore_text = font.render(f"High Score: {pacifist_highscore}s", True, (255, 255, 255))
-        highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 10, 10))
+        highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 55, 10))
         screen.blit(highscore_text, highscore_rect)
     else:
         highscore_text = font.render(f"High Score: {highscore}", True, (255, 255, 255))
-        highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 10, 10))
-        pacifist_highscore_text = font.render(f"High Time: {pacifist_highscore:.2f}s", True, (255, 255, 255))
-        pacifist_highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 10, 60))
+        highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 55, 10))
+        pacifist_highscore_text = font.render(f"Pacifist High Score: {pacifist_highscore:.2f}s", True, (255, 255, 255))
+        pacifist_highscore_rect = pacifist_text.get_rect(topright=(SCREEN_WIDTH - 55, 10))
 
         screen.blit(highscore_text, highscore_rect)
         screen.blit(pacifist_highscore_text, pacifist_highscore_rect)

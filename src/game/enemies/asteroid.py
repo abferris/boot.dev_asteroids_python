@@ -6,7 +6,7 @@ from src.game.circleshape import CircleShape
 from src.game.player.player import Player
 
 class Asteroid(CircleShape):
-    def __init__(self,x,y,radius,):
+    def __init__(self,x,y,radius):
         super().__init__(x,y,radius)
 
     def draw(self,screen,color=ASTEROID_COLOR,width=0):
