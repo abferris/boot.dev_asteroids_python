@@ -1,7 +1,9 @@
 import pygame
 import random
-from src.objects.asteroid import Asteroid
-from src.abstractions.constants import *
+
+from src.core.constants import *
+
+from src.game.enemies.asteroid import Asteroid
 
 
 class AsteroidField(pygame.sprite.Sprite):
@@ -34,25 +36,34 @@ class AsteroidField(pygame.sprite.Sprite):
         self.spawn_rate = ASTEROID_SPAWN_RATE
         self.difficulty_timer = 0.0
         self.paused = False
+        self.spawn_quantity = ASTEROID_SPAWN_QUANTITY
 
     def toggle_pause(self):
         self.paused = not self.paused
         
 
-    def spawn(self, radius, position, velocity):
+    def spawn(self, radius:int, position:pygame.Vector2, velocity:pygame.Vector2):
         asteroid = Asteroid(position.x, position.y, radius)
         asteroid.velocity = velocity
+
         if hasattr(asteroid, "add"):
             asteroid.add(*asteroid.containers)
 
-    def update(self, dt):
+    def update(self, dt:float):
         if self.paused:
             return
+
         self.spawn_timer += dt
         self.difficulty_timer  += dt
+
         if self.difficulty_timer > ASTEROID_SPAWN_RATE_INCREASE_TIMER:
+            if self.spawn_rate >= ASTEROID_MIN_SPAWN_RATE:
+                self.spawn_quantity += 1
             self.spawn_rate = max(ASTEROID_MIN_SPAWN_RATE, self.spawn_rate - ASTEROID_SPAWN_RATE_CHANGE)
             self.difficulty_timer = 0
+
+
+
         if self.spawn_timer > self.spawn_rate:
             self.spawn_timer = 0.0
             edge = random.choice(self.edges)
@@ -61,5 +72,5 @@ class AsteroidField(pygame.sprite.Sprite):
             velocity = velocity.rotate(random.randint(-30, 30))
             position = edge[1](random.uniform(0, 1))
             kind = random.randint(1, ASTEROID_KINDS)
-            self.spawn(ASTEROID_MIN_RADIUS * kind, position, velocity)
-
+            for _ in range(self.spawn_quantity):
+                self.spawn(ASTEROID_MIN_RADIUS * kind, position, velocity)

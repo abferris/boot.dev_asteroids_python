@@ -18,11 +18,11 @@ Your ship (unless you are in pacifist mode) has a weapon. When the weapon shot i
 
 If it comes into a contact with an asteroid, the asteroid will be hit. There are multiple sizes of asteroids. If the asteroid is hit, it will become 2 asteroids one size smaller. They fly at 45 degrees from the asteroid's original trajectory in both directions at twice the original speed.
 
-If the asteroid is the smallest size, there will be no children asteroids created.
+If the asteroid is the smallest size, there will be no children asteroids created. As time goes on, asteroids will spawn more and more frequently. When the minimum spawn rate is hit, the quantity of asteroids spawned will go up.
 
 The game goes on until you are destroyed by hitting an asteroid.
 
-##Controls:
+## Controls:
 
 Accelleration (forward): Up Arrow or W
 Decelleration (accellerate backwards): Down Arrow or S
@@ -77,6 +77,7 @@ Most constants are self evident, but this is a list of constants to change
     - minimum asteroid spawn rate (in seconds)
     - time it takes for the spawn rate to get shorter (in seconds)
     - amount the spawn rate lessens by (in seconds)
+    - number of asteroids to spawn every time
 - Player
   - size
   - movement
@@ -88,7 +89,6 @@ Most constants are self evident, but this is a list of constants to change
     - shot cooldown (minimum time between shots)
     - shot speed (how fast it travels)
     - shot size
-
 - background
   - secondary color
     - if shot secondary color doesn't exist, it will just be black
@@ -102,28 +102,37 @@ Most constants are self evident, but this is a list of constants to change
         py_asteroids/
         ├── main.py
         ├── pyproject.toml
-        ├── src/
-        │   ├── highscore.py
-        │   ├── abstractions/
-        │   │   ├── __init__.py
-        │   │   ├── constants.py   # game constants which can be changed to mod the game
-        │   │   ├── background.py  
-        │   │   ├── input-helpers.py
-        │   │   ├── menu_helpers.py
-        │   │   └── score.hud.py
-        │   ├── data/
-        |   │   └── highscores.json # this is ignored and will be created when you first run the game
-        │   └── objects
-        │       ├── __init__.py   
-        │       ├── asteroid.py
-        │       ├── circleshape.py
-        │       ├── menu.py
-        │       ├── player.py
-        |       └── shot.py
-        ├── pyproject.toml
-        └── README.md
+        ├── README.md
+        ├── .gitignore
+        └── src/
+            ├── core
+            │   ├── constants.py   # game constants which can be changed to mod the game
+            highscore.py
+            ├── data/
+            │   └── highscores.json # this is ignored and will be created when you first run the game
+            ├── game/
+            │   ├── __init__.py
+            │   ├── background.py  
+            │   ├── circleshape.py
+            │   ├── enemies/
+            │   │   ├── __init__.py
+            │   │   ├── asteroid.py
+            │   │   └── asteroidfield.py
+            │   └── player/
+            │      ├── __init__.py
+            │      ├── player.py
+            │      └── shot.py
+            └── ui/
+                ├── __init__.py   
+                ├── menu_helpers.py
+                ├── menu_inputs.py
+                ├── menu.py
+                └── score.hud.py
+       
 
 ## Future Improvements
+- add typing to everything
+- fix the 5 looking weird when printing
 - add the ability to use assets
   - potential to add background asset
   - replace triangle with a ship image
@@ -147,6 +156,17 @@ Most constants are self evident, but this is a list of constants to change
     - accelleration
 - allow for fullscreen mode/screen size changes
   - set up minimum screen size
+- secondary menu to modify constants in game
+  - if constants are modified, high score is reset
+  - warning that doing this will reset your high score
+  - option to reset high score by itself
+- setup safegaurd of high scores being tampered with manually
+- setting up so this game can run without terminal from an icon
+- adding enemies
+
+- not sure if i should be adding output typing to all of my fuctions. 
+  - Not sure where it is appropriate
+  - need feedback on where function inputs and outputs need typing
 
 ## Screen Shots
 Fig. 1: Home Screen

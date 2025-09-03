@@ -1,22 +1,23 @@
 import pygame
-from src.abstractions.constants import *
-from src.abstractions.background import *
-from src.abstractions.score_hud import *
 
-from src.objects.player import Player
-from src.objects.asteroid import Asteroid
-from src.objects.asteroidfield import *
-from src.objects.menu import Menu
-from src.objects.shot import Shot
+from src.core.constants import *
+from src.core.background import set_solid_background, set_shifting_gradient
+from src.core.highscore import update_highscore
 
-from src.highscore import load_highscore, update_highscore
+from src.game.player.player import Player
+from src.game.enemies.asteroid import Asteroid
+from src.game.enemies.asteroidfield import AsteroidField
+from src.game.player.shot import Shot
+
+from src.ui.menu import Menu
+from src.ui.score_hud import draw_hud
 
 
 
 
-def run_game(screen, clock, pacifist_mode):
+def run_game(screen:pygame.Surface, clock:pygame.time.Clock, pacifist_mode:bool):
     paused = False
-    dims = SCREEN_WIDTH, SCREEN_HEIGHT
+    dimensions = SCREEN_WIDTH, SCREEN_HEIGHT
     bg_offset = 0
 
     updatable = pygame.sprite.Group()
@@ -69,7 +70,7 @@ def run_game(screen, clock, pacifist_mode):
 
         set_solid_background((0, 0, 0), screen)
         if BG_SECONDARY:
-            bg_offset = set_shifting_gradient(BG_SECONDARY, screen, dims, bg_offset, BG_SPEED)
+            bg_offset = set_shifting_gradient(BG_SECONDARY, screen, dimensions, bg_offset, BG_SPEED)
 
         for obj in drawable:
             obj.draw(screen)
@@ -77,11 +78,13 @@ def run_game(screen, clock, pacifist_mode):
 
         pygame.display.flip()
 
-def handle_pause(screen,clock,player):
+def handle_pause(screen:pygame.Surface, clock:pygame.time.Clock, player:Player):
     pause_options,pause_results = ["Resume", "Restart", "Quit"],  ["resume", "restart", "quit"]
     pause_menu = Menu("Paused", pause_options, pause_results, f"Current Score: {player.score}")
-
-    choice = pause_menu.run_menu(screen, clock)
+    if player.pacifist_mode:
+        choice = pause_menu.run_menu(screen, clock, 0)
+    else:
+        choice = pause_menu.run_menu(screen, clock, 1)
 
     if choice == "resume":
        return False
@@ -90,18 +93,26 @@ def handle_pause(screen,clock,player):
     elif choice == "quit":
         return "quit"
 
-def handle_game_over(screen,clock,player):
+def handle_game_over(screen:pygame.Surface,clock:pygame.time.Clock,player:Player):
     final_score = player.score
-    g_o_options, g_o_results = ["Restart", "Exit"],  [True, False]
-    scoreline = f"Score: {player.score} | Time: {player.survival_time:.2f}s"
+    final_time = player.survival_time
+    pacifist_mode = player.pacifist_mode
+    game_over_options, game_over_results = ["Restart", "Exit"],  [True, False]
+    if not pacifist_mode:
+            scoreline = f"Score: {player.score} | Time: {player.survival_time:.2f}s"
+            pacifist_option = 0
+    else:
+        scoreline = f"Time: {player.survival_time:.2f}s"
+        pacifist_option = 1
+    if update_highscore(final_score,final_time,pacifist_mode):
+            scoreline = f"NEW HIGH SCORE!\n{scoreline}"
 
-    if update_highscore(final_score):
-        scoreline = f"NEW HIGH SCORE!\n{scoreline}"
+    game_over_menu = Menu("Game Over", game_over_options, game_over_results, scoreline, (255, 0, 0))
 
-    game_over_menu = Menu("Game Over", g_o_options, g_o_results, scoreline, (255, 0, 0))
-
-    restart = game_over_menu.run_menu(screen, clock)
     
+    restart = game_over_menu.run_menu(screen, clock, pacifist_option)
+
+
     if restart:
         return "restart"
     else:

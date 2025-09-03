@@ -1,16 +1,18 @@
 import pygame
-from src.abstractions.constants import *
-from src.objects.circleshape import CircleShape
+
+from src.core.constants import *
+
+from src.game.circleshape import CircleShape
 
 class Shot(CircleShape):
-    def __init__(self,x,y,radius=SHOT_RADIUS):
+    def __init__(self,x:float,y:float,radius:int=SHOT_RADIUS):
         super().__init__(x,y,radius)
         self.edge_hits = 0
 
-    def draw(self,screen,color="white",width=2):
-        pygame.draw.circle(screen,color,self.position,self.radius, width)
+    def draw(self,screen:pygame.Surface,color:tuple=(255,255,255),width:int=2):
+        pygame.draw.circle(screen ,color ,self.position ,self.radius , width)
 
-    def update(self,dt):
+    def update(self,dt:float):
         if self.paused:
             return
         

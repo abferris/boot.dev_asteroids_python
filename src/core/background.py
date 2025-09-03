@@ -1,16 +1,16 @@
-from src.abstractions.constants import *
+from src.core.constants import *
 import pygame
 
 
 
 
 
-def set_solid_background(rgb,screen):
+def set_solid_background(rgb:tuple,screen:pygame.Surface):
     screen.fill(rgb)
 
 
-def set_shifting_gradient(rgb,screen,dims, bg_offset = 0, speed=.3 ) :
-    win_width, win_height = dims
+def set_shifting_gradient(rgb,screen:pygame.Surface, dimensions=tuple, bg_offset:float = 0, speed:float=.3 ) :
+    win_width, win_height = dimensions
     for y in range(win_height):
             grad_height = win_height
             half_grad_height = win_height / 2
@@ -21,7 +21,7 @@ def set_shifting_gradient(rgb,screen,dims, bg_offset = 0, speed=.3 ) :
                 for val in rgb:
                     temp = int(val * (grad_pos / (half_grad_height)))
                     rgb_list.append(temp)
-            else :
+            else:
                 for val in rgb:
                     temp = int(val * (1 - (grad_pos - half_grad_height) / (half_grad_height)))
                     rgb_list.append(temp)
