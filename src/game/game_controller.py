@@ -15,7 +15,7 @@ from src.ui.score_hud import draw_hud
 
 
 
-def run_game(screen, clock, pacifist_mode):
+def run_game(screen:pygame.Surface, clock:pygame.time.Clock, pacifist_mode:bool):
     paused = False
     dimensions = SCREEN_WIDTH, SCREEN_HEIGHT
     bg_offset = 0
@@ -78,7 +78,7 @@ def run_game(screen, clock, pacifist_mode):
 
         pygame.display.flip()
 
-def handle_pause(screen, clock, player):
+def handle_pause(screen:pygame.Surface, clock:pygame.time.Clock, player:Player):
     pause_options,pause_results = ["Resume", "Restart", "Quit"],  ["resume", "restart", "quit"]
     pause_menu = Menu("Paused", pause_options, pause_results, f"Current Score: {player.score}")
     if player.pacifist_mode:
@@ -93,7 +93,7 @@ def handle_pause(screen, clock, player):
     elif choice == "quit":
         return "quit"
 
-def handle_game_over(screen,clock,player):
+def handle_game_over(screen:pygame.Surface,clock:pygame.time.Clock,player:Player):
     final_score = player.score
     final_time = player.survival_time
     pacifist_mode = player.pacifist_mode

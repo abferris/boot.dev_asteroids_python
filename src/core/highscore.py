@@ -1,5 +1,6 @@
 import json
 import os
+from typing import Union
 
 from src.core.constants import *
 
@@ -27,7 +28,7 @@ def load_highscore() -> tuple[int,int]:
     return normal,pacifist
 
 
-def save_highscore(score, pacifist=False) -> None:
+def save_highscore(score:Union[int,float], pacifist=False) -> None:
     current, pacifist_current = load_highscore()
     new_data = {
         "highscore": current,
@@ -43,7 +44,7 @@ def save_highscore(score, pacifist=False) -> None:
         json.dump(new_data, f)
 
 
-def update_highscore(score: int, time, pacifist_mode=False) -> bool:
+def update_highscore(score:int, time:float, pacifist_mode=False) -> bool:
     current,pacifist_current = load_highscore()
 
     if pacifist_mode and time > pacifist_current:

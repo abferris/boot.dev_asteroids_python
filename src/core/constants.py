@@ -41,8 +41,8 @@ HUD_Y = 10
 HUD_COLOR = 30, 30, 30
 HUD_X = SCREEN_WIDTH - HUD_WIDTH - 10  # 10 px from right
 
-LARGE_FONT_SIZE = 72
-SMALL_FONT_SIZE = 36
+LARGE_FONT_SIZE = 60
+SMALL_FONT_SIZE = 25
 
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")

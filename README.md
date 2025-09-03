@@ -131,6 +131,8 @@ Most constants are self evident, but this is a list of constants to change
        
 
 ## Future Improvements
+- add typing to everything
+- fix the 5 looking weird when printing
 - add the ability to use assets
   - potential to add background asset
   - replace triangle with a ship image
@@ -160,6 +162,11 @@ Most constants are self evident, but this is a list of constants to change
   - option to reset high score by itself
 - setup safegaurd of high scores being tampered with manually
 - setting up so this game can run without terminal from an icon
+- adding enemies
+
+- not sure if i should be adding output typing to all of my fuctions. 
+  - Not sure where it is appropriate
+  - need feedback on where function inputs and outputs need typing
 
 ## Screen Shots
 Fig. 1: Home Screen

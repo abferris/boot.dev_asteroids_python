@@ -41,23 +41,22 @@ def process_selection(selected,options_results):
 def draw_highscore(screen, pacifist_mode:bool=False):
     font = get_font(SMALL_FONT_SIZE)
     # May be causing a lot of calls to load highscore
-    print("drawing highscore")
     highscore,pacifist_highscore = load_highscore()
     if pacifist_mode == 0:
         highscore_text = font.render(f"High Score: {highscore}", True, (255, 255, 255))
     elif pacifist_mode == 1:
         highscore_text = font.render(f"High Score: {pacifist_highscore}s", True, (255, 255, 255))
-        highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 55, 10))
+        highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 10, 10))
         screen.blit(highscore_text, highscore_rect)
     else:
         highscore_text = font.render(f"High Score: {highscore}", True, (255, 255, 255))
-        highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 55, 10))
+        highscore_rect = highscore_text.get_rect(topright=(SCREEN_WIDTH - 10, 10))
         pacifist_highscore_text = font.render(f"Pacifist High Score: {pacifist_highscore:.2f}s", True, (255, 255, 255))
-        pacifist_highscore_rect = pacifist_text.get_rect(topright=(SCREEN_WIDTH - 55, 10))
+        pacifist_highscore_rect = pacifist_highscore_text.get_rect(topright=(SCREEN_WIDTH - 10, 40))
 
         screen.blit(highscore_text, highscore_rect)
         screen.blit(pacifist_highscore_text, pacifist_highscore_rect)
         
 
 def get_font(font_size):
-    return pygame.font.Font(None, font_size)
+    return pygame.font.SysFont("Courier", font_size)

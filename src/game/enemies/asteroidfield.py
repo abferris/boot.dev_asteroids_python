@@ -42,14 +42,14 @@ class AsteroidField(pygame.sprite.Sprite):
         self.paused = not self.paused
         
 
-    def spawn(self, radius, position, velocity):
+    def spawn(self, radius:int, position:pygame.Vector2, velocity:pygame.Vector2):
         asteroid = Asteroid(position.x, position.y, radius)
         asteroid.velocity = velocity
 
         if hasattr(asteroid, "add"):
             asteroid.add(*asteroid.containers)
 
-    def update(self, dt):
+    def update(self, dt:float):
         if self.paused:
             return
 

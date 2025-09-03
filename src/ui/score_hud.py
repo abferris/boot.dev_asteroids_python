@@ -1,7 +1,9 @@
 import pygame
 from src.core.constants import *
+from src.game.player.player import Player
 
-def draw_hud(screen,player):
+
+def draw_hud(screen,player:Player):
     font = pygame.font.Font(None,SMALL_FONT_SIZE)
 
     pygame.draw.rect(screen, HUD_COLOR, (HUD_X, HUD_Y, HUD_WIDTH, HUD_HEIGHT ))

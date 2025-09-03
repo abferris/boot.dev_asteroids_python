@@ -1,7 +1,7 @@
 import pygame
 
 class CircleShape(pygame.sprite.Sprite):
-    def __init__(self, x, y, radius):
+    def __init__(self, x:float, y:float, radius:int):
         if hasattr(self, "containers"):
             super().__init__(self.containers)
         else:
@@ -15,10 +15,10 @@ class CircleShape(pygame.sprite.Sprite):
     def toggle_pause(self):
         self.paused = not self.paused
 
-    def draw(self, screen):
+    def draw(self, screen:pygame.Surface):
         pass
 
-    def update(self, dt):
+    def update(self, dt:float):
         pass
         
     def collision_check(self, other):

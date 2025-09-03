@@ -33,8 +33,8 @@ def main():
     while True:
         main_menu = Menu("Asteroids",main_menu_options, main_menu_options_results)
 
-        play, pacifist_mode = main_menu.run_menu(screen, clock,2)
-    
+        play, pacifist_mode = main_menu.run_menu(screen, clock, 2)
+   
         if not play:
             return  
     

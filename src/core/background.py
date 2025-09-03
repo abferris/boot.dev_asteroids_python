@@ -5,11 +5,11 @@ import pygame
 
 
 
-def set_solid_background(rgb,screen):
+def set_solid_background(rgb:tuple,screen:pygame.Surface):
     screen.fill(rgb)
 
 
-def set_shifting_gradient(rgb,screen,dimensions, bg_offset = 0, speed=.3 ) :
+def set_shifting_gradient(rgb,screen:pygame.Surface, dimensions=tuple, bg_offset:float = 0, speed:float=.3 ) :
     win_width, win_height = dimensions
     for y in range(win_height):
             grad_height = win_height

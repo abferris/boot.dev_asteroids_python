@@ -6,7 +6,7 @@ from src.game.circleshape import CircleShape
 from src.game.player.shot import Shot
 
 class Player(CircleShape):
-    def __init__(self, x, y, pacifist_mode = False):
+    def __init__(self, x:float, y:float, pacifist_mode:bool = False):
         super().__init__(x, y , PLAYER_RADIUS)
         self.rotation = 0
         self.shoot_cooldown = 0
@@ -19,10 +19,10 @@ class Player(CircleShape):
         self.pacifist_mode = pacifist_mode
 
 
-    def add_score(self, num):
+    def add_score(self, num:int):
         self.score += num
 
-    def draw(self,screen,color="white",width=2):
+    def draw(self,screen:pygame.Surface,color:tuple=(255,255,255),width:int=2):
         pygame.draw.polygon(screen,color, self.triangle(), width)
 
     def triangle(self):
@@ -33,17 +33,17 @@ class Player(CircleShape):
         c = self.position - forward * self.radius + right
         return [a, b, c]
 
-    def rotate(self,dt):
+    def rotate(self,dt:float):
         self.rotation += PLAYER_TURN_SPEED * dt
     
-    def  move(self,dt, thrust = 1):
+    def  move(self,dt:float, thrust:int = 1):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.velocity += forward * self.acceleration * thrust * dt
         if self.velocity.length() > self.max_speed:
             self.velocity.scale_to_length(self.max_speed)
 
 
-    def update(self, dt):
+    def update(self, dt:float):
         if self.paused:
             return
         keys = pygame.key.get_pressed()
